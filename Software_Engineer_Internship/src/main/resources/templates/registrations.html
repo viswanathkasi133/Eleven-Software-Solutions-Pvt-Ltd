@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrations</title>
+</head>
+<body>
+    <h1>Registrations</h1>
+    <form th:action="@{/registrations}" method="post">
+        <input type="text" name="studentName" placeholder="Student Name" required>
+        <input type="text" name="courseTypeName" placeholder="Course Type" required>
+        <input type="text" name="courseName" placeholder="Course Name" required>
+        <button type="submit">Register</button>
+    </form>
+    <ul>
+        <li th:each="registration : ${registrations}">
+            <span th:text="${registration.studentName}"></span> -
+            <span th:text="${registration.courseTypeName}"></span> -
+            <span th:text="${registration.courseName}"></span>
+            <form th:action="@{/registrations/{id}(id=${registration.id})}" method="post" style="display:inline;">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    </ul>
+</body>
+</html>
